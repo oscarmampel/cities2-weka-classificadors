@@ -8,6 +8,8 @@ import weka.filters.unsupervised.attribute.Remove;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instance;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class Indoor {
@@ -45,6 +47,7 @@ public class Indoor {
         int numFolds = 10;//divideixo el dataset amb 10 troços
         double correctClassified = 0;
         double incorrectClassified = 0;
+        double[][] matrix = {{0,0,0},{0,0,0},{0,0,0}};
 
         for (int fold = 0; fold < numFolds; fold++) {
             // divideixo el dataset en un dataset de entrenament i un de test
@@ -83,7 +86,9 @@ public class Indoor {
                     //miro si la floristeria ha estat classificada be
                     if (instance.classValue() == 1.0) {
                         correctClassified++;
+                        matrix[1][1]++;
                     } else {
+                        matrix[1][(int)d]++;
                         incorrectClassified++;
                     }
                 } 
@@ -96,6 +101,7 @@ public class Indoor {
                     } else {
                         incorrectClassified++;
                     }
+                    matrix[(int)instance.classValue()][(int)d]++;
                 }
             }
 
@@ -103,5 +109,9 @@ public class Indoor {
         }
 
         System.out.println("Correctly Classified Instances "+correctClassified / (correctClassified + incorrectClassified));
+        System.out.println("Matrix:");
+        System.out.println(Arrays.toString(matrix[0]));
+        System.out.println(Arrays.toString(matrix[1]));
+        System.out.println(Arrays.toString(matrix[2]));
     }
 }
