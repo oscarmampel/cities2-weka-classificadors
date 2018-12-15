@@ -8,13 +8,121 @@ import weka.filters.unsupervised.attribute.Remove;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instance;
+import weka.core.Attribute;
+import weka.core.SparseInstance;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Indoor {
 
+    NaiveBayes naiveBayes;
+    RandomForest randomForest;
+    DataSource source;
+
+    //crea la instancia Indoor !!ATENCIO!! al crear la instancia s'entrenen els classificadors
+    //cosa que tarda bastant de temps, es recomana crear nomes una instancia i guardarla en una propietat estatica.
+    Indoor() throws Exception{
+        source = new DataSource("datasets/indoor.arff");
+        Instances data = source.getDataSet();
+        if (data.classIndex() == -1)
+            data.setClassIndex(data.numAttributes() - 1);
+
+        // aplico el phogFilter
+        String[] optionsPhog = new String[2];
+        optionsPhog[0] = "-D";
+        optionsPhog[1] = "datasets";
+        PHOGFilter phog = new PHOGFilter();
+        phog.setOptions(optionsPhog);
+        phog.setInputFormat(data);
+        Instances phogData = Filter.useFilter(data, phog);
+
+        String[] optionsR = new String[2];
+        optionsR[0] = "-R";
+        optionsR[1] = "1";
+        Remove remove = new Remove();
+        remove.setOptions(optionsR);
+        remove.setInputFormat(phogData);
+        Instances phogClearData = Filter.useFilter(phogData, remove);
+
+        naiveBayes = new NaiveBayes();
+        naiveBayes.buildClassifier(phogClearData);
+
+        // entreno el algoritme per a la resta
+        randomForest = new RandomForest();
+        String options = "-P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1";
+        randomForest.setOptions(options.split(" "));
+        randomForest.buildClassifier(phogClearData);
+    }
+
+    public double classifica(String filename,String path) throws Exception{
+
+        ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+        Instances templete = source.getDataSet();
+
+        for(int x=0;x<templete.numAttributes();x++){
+            attributes.add(templete.attribute(x));
+        }
+
+        Instances dataRaw = new Instances("Instancia", attributes, 0);
+        dataRaw.setClassIndex(1);
+        /*System.out.println("Before adding any instance");
+        System.out.println("--------------------------");
+        System.out.println(dataRaw);
+        System.out.println("--------------------------");*/
+
+        double[] instanceValue1 = new double[dataRaw.numAttributes()];
+        instanceValue1[0] = dataRaw.attribute(0).addStringValue(filename);
+        instanceValue1[1] = 2;
+
+        dataRaw.add(new SparseInstance(1.0, instanceValue1));
+        //System.out.println("added isntance");
+        //System.out.println(dataRaw);
+
+        String[] optionsPhog = new String[2];
+        optionsPhog[0] = "-D";
+        optionsPhog[1] = path;
+        PHOGFilter phog = new PHOGFilter();
+        phog.setOptions(optionsPhog);
+        phog.setInputFormat(dataRaw);
+        Instances phogData = Filter.useFilter(dataRaw, phog);
+        //System.out.println("apply phog filter");
+
+        //System.out.println(phogData);
+        String[] optionsR = new String[2];
+        optionsR[0] = "-R";
+        optionsR[1] = "1";
+        Remove remove = new Remove();
+        remove.setOptions(optionsR);
+        remove.setInputFormat(phogData);
+        Instances phogClearData = Filter.useFilter(phogData, remove);
+        //System.out.println("remove attribute 1");
+        //System.out.println(phogClearData);
+
+        double d = naiveBayes.classifyInstance(phogClearData.firstInstance());
+        if(d==1.0){
+            return 1.0;
+        }
+        d = randomForest.classifyInstance(phogClearData.firstInstance());
+        return d;
+    }
+
     public static void main(String[] args) throws Exception {
+        System.out.println("entrena!!");
+        Indoor indoor = new Indoor();
+        System.out.println("classifica!!");
+        double d = indoor.classifica("ascensor.jpeg", "test");
+        System.out.println("ascensor==0?"+d);
+
+        d = indoor.classifica("floristeria.jpg", "test");
+        System.out.println("floristeria==1?"+d);
+
+        d = indoor.classifica("armario.jpeg", "test");
+        System.out.println("armario==2?"+d);
+    }
+
+    public static void main2(String[] args) throws Exception {
         // carrego el datasource
         DataSource source = new DataSource("datasets/indoor.arff");
         Instances data = source.getDataSet();
