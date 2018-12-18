@@ -23,20 +23,26 @@ public class Indoor {
 
     //crea la instancia Indoor !!ATENCIO!! al crear la instancia s'entrenen els classificadors
     //cosa que tarda bastant de temps, es recomana crear nomes una instancia i guardarla en una propietat estatica.
-    Indoor() throws Exception{
-        source = new DataSource("datasets/indoor.arff");
+    public Indoor() throws Exception{
+        source = new DataSource("cities2-weka-classificadors/datasets/indoor.arff");
         Instances data = source.getDataSet();
         if (data.classIndex() == -1)
             data.setClassIndex(data.numAttributes() - 1);
+        System.out.println("llega 0");
 
         // aplico el phogFilter
         String[] optionsPhog = new String[2];
         optionsPhog[0] = "-D";
-        optionsPhog[1] = "datasets";
+        optionsPhog[1] = "cities2-weka-classificadors/datasets";
+
         PHOGFilter phog = new PHOGFilter();
         phog.setOptions(optionsPhog);
+        System.out.println("llega 0.33");
+        System.out.println(data);
         phog.setInputFormat(data);
+        System.out.println("llega 0.66");
         Instances phogData = Filter.useFilter(data, phog);
+        System.out.println("llega 1");
 
         String[] optionsR = new String[2];
         optionsR[0] = "-R";
@@ -45,15 +51,19 @@ public class Indoor {
         remove.setOptions(optionsR);
         remove.setInputFormat(phogData);
         Instances phogClearData = Filter.useFilter(phogData, remove);
+        System.out.println("llega 2");
 
         naiveBayes = new NaiveBayes();
         naiveBayes.buildClassifier(phogClearData);
+        System.out.println("llega 3");
 
         // entreno el algoritme per a la resta
         randomForest = new RandomForest();
         String options = "-P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1";
         randomForest.setOptions(options.split(" "));
         randomForest.buildClassifier(phogClearData);
+        System.out.println("entreno hecho");
+
     }
 
     public double classifica(String filename,String path) throws Exception{
@@ -112,13 +122,13 @@ public class Indoor {
         System.out.println("entrena!!");
         Indoor indoor = new Indoor();
         System.out.println("classifica!!");
-        double d = indoor.classifica("ascensor.jpeg", "test");
+        double d = indoor.classifica("ascensor.jpeg", "cities2-weka-classificadors/test");
         System.out.println("ascensor==0?"+d);
 
-        d = indoor.classifica("floristeria.jpg", "test");
+        d = indoor.classifica("floristeria.jpg", "cities2-weka-classificadors/test");
         System.out.println("floristeria==1?"+d);
 
-        d = indoor.classifica("armario.jpeg", "test");
+        d = indoor.classifica("armario.jpeg", "cities2-weka-classificadors/test");
         System.out.println("armario==2?"+d);
     }
 

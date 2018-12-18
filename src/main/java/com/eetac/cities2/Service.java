@@ -1,4 +1,4 @@
-package com.eetac.cities2.Controller;
+package com.eetac.cities2;
 
 
 import com.eetac.cities2.Indoor;
@@ -17,12 +17,21 @@ import java.io.File;
 public class Service {
     private Indoor indoor;
     public Service() throws Exception {
-        indoor = new Indoor();
+       indoor = new Indoor();
+    }
+    @GET
+    @Path("/hi")
+    public Response hi() {
+        System.out.println("entra!");
+        return Response.status(Response.Status.CREATED).entity(0)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS").build();//201
     }
 
     @POST
     @Path("/add")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response add(String image) {
         double code = 3;
         try {
