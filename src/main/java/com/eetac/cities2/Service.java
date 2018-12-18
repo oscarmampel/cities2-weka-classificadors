@@ -36,17 +36,17 @@ public class Service {
     public Response add(String image) {
         double code = 3;
         try {
-            System.out.println(image);
-            System.out.println("--------------------------------------------------------------------------------------------");
+            //System.out.println(image);
+            //System.out.println("--------------------------------------------------------------------------------------------");
             String base64Image = image;
-            System.out.println(base64Image);
+            //System.out.println(base64Image);
             byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
             File imageFile = new File("test/"+UUID.randomUUID()+".jpg");
             try {
                 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
                 ImageIO.write(bufferedImage, "jpg", imageFile);
-                System.out.println(imageFile.getName());
-                System.out.println(imageFile.getPath());
+                //System.out.println(imageFile.getName());
+                //System.out.println(imageFile.getPath());
                 code = indoor.classifica(imageFile.getName(), "test");
             }
             catch(Exception e){

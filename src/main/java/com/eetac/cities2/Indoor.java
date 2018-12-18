@@ -28,21 +28,16 @@ public class Indoor {
         Instances data = source.getDataSet();
         if (data.classIndex() == -1)
             data.setClassIndex(data.numAttributes() - 1);
-        System.out.println("llega 0");
 
         // aplico el phogFilter
         String[] optionsPhog = new String[2];
         optionsPhog[0] = "-D";
-        optionsPhog[1] = "cities2-weka-classificadors/datasets";
+        optionsPhog[1] = "datasets";
 
         PHOGFilter phog = new PHOGFilter();
         phog.setOptions(optionsPhog);
-        System.out.println("llega 0.33");
-        System.out.println(data);
         phog.setInputFormat(data);
-        System.out.println("llega 0.66");
         Instances phogData = Filter.useFilter(data, phog);
-        System.out.println("llega 1");
 
         String[] optionsR = new String[2];
         optionsR[0] = "-R";
@@ -51,18 +46,15 @@ public class Indoor {
         remove.setOptions(optionsR);
         remove.setInputFormat(phogData);
         Instances phogClearData = Filter.useFilter(phogData, remove);
-        System.out.println("llega 2");
 
         naiveBayes = new NaiveBayes();
         naiveBayes.buildClassifier(phogClearData);
-        System.out.println("llega 3");
 
         // entreno el algoritme per a la resta
         randomForest = new RandomForest();
         String options = "-P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1";
         randomForest.setOptions(options.split(" "));
         randomForest.buildClassifier(phogClearData);
-        System.out.println("entreno hecho");
 
     }
 

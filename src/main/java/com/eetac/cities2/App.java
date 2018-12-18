@@ -23,7 +23,6 @@ public class App {
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
-        System.out.println(rc.getClasses());
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 

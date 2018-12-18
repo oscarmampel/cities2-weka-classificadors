@@ -49,6 +49,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+var httpOptions = { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({
+        'Access-Control-Allow-Origin': '*',
+    })
+};
 var AppComponent = /** @class */ (function () {
     function AppComponent(http) {
         this.http = http;
