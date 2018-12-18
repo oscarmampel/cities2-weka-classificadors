@@ -11,6 +11,7 @@ import javax.ws.rs.core.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.UUID;
 
 @Path("/image")
 @Singleton
@@ -22,18 +23,22 @@ public class Service {
 
     @POST
     @Path("/add")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     public Response add(String image) {
         double code = 3;
         try {
             System.out.println(image);
-            String base64Image = image.split(",")[1];
+            System.out.println("--------------------------------------------------------------------------------------------");
+            String base64Image = image;
+            System.out.println(base64Image);
             byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-            File imageFile = new File("cities2-weka-classificadors\\datasets\\"+image+".jpg");
+            File imageFile = new File("test/"+UUID.randomUUID()+".jpg");
             try {
                 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-                ImageIO.write(bufferedImage, "png", imageFile);
-                code = indoor.classifica(imageFile.getName(), imageFile.getPath());
+                ImageIO.write(bufferedImage, "jpg", imageFile);
+                System.out.println(imageFile.getName());
+                System.out.println(imageFile.getPath());
+                code = indoor.classifica(imageFile.getName(), "test");
             }
             catch(Exception e){
                 e.printStackTrace();

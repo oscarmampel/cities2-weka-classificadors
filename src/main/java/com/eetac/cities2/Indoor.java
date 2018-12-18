@@ -23,7 +23,7 @@ public class Indoor {
 
     //crea la instancia Indoor !!ATENCIO!! al crear la instancia s'entrenen els classificadors
     //cosa que tarda bastant de temps, es recomana crear nomes una instancia i guardarla en una propietat estatica.
-    Indoor() throws Exception{
+    public Indoor() throws Exception{
         source = new DataSource("datasets/indoor.arff");
         Instances data = source.getDataSet();
         if (data.classIndex() == -1)

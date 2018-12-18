@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".spacer {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n}\r\n.card {\r\n  margin: 15px auto;\r\n  max-width: 650px;\r\n}\r\n.upload-file{\r\n  margin-top: 1em;\r\n  margin-bottom: 1em;\r\n}\r\n.component-field {\r\n  display: block\r\n}\r\n.component-button {\r\n  max-width: 8em;\r\n}\r\n.material-icons {\r\n  margin-right: 1em;\r\n}\r\n.function {\r\n  margin-top: 2em;\r\n  margin-bottom: 2em;\r\n}\r\n.explanation{\r\n  padding: 1.75em 2em 2em;\r\n}\r\n\r\n"
+module.exports = ".spacer {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n.card {\n  margin: 15px auto;\n  max-width: 650px;\n}\n.upload-file{\n  margin-top: 1em;\n  margin-bottom: 1em;\n}\n.component-field {\n  display: block\n}\n.component-button {\n  max-width: 8em;\n}\n.material-icons {\n  margin-right: 1em;\n}\n.function {\n  margin-top: 2em;\n  margin-bottom: 2em;\n}\n.explanation{\n  padding: 1.75em 2em 2em;\n}\n\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<mat-toolbar color=\"primary\">\r\n  <span>Cities 2 - Image Classification</span>\r\n  <span class=\"spacer\"></span>\r\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\r\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\r\n</mat-toolbar>\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"function col-md-12\">\r\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\r\n      <mat-card class=\"card col-md-6\">\r\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\r\n\r\n        <div class=\"upload-file\">\r\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\r\n        </div>\r\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\r\n      </mat-card>\r\n      <div class=\"explanation col-md-6\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12\">\r\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<mat-toolbar color=\"primary\">\n  <span>Cities 2 - Image Classification</span>\n  <span class=\"spacer\"></span>\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\n</mat-toolbar>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"function col-md-12\">\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\n      <mat-card class=\"card col-md-6\">\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\n\n        <div class=\"upload-file\">\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\n        </div>\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\n      </mat-card>\n      <div class=\"explanation col-md-6\">\n\n      </div>\n      <div class=\"col-md-12\">\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -49,35 +49,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var httpOptions = { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({
-        'Access-Control-Allow-Origin': '*',
-    })
-};
 var AppComponent = /** @class */ (function () {
     function AppComponent(http) {
         this.http = http;
         this.url = '';
     }
-    // this.filesToUpload = <Array<File>>event.target.files;
-    // if (event.target.files && event.target.files[0]) {
-    //   let reader = new FileReader();
-    //
-    //   reader.onload = (event: any) => {
-    //     this.url = event.target.result;
-    //   };
-    //
-    //   reader.readAsDataURL(event.target.files[0]);
-    //   console.log(reader);
-    // }
     AppComponent.prototype.handleFileInput = function (event) {
-        this.filesToUpload = event.target.files;
+        var files = event.target.files;
+        var file = files[0];
+        if (files && file) {
+            var reader = new FileReader();
+            reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(file);
+        }
+    };
+    AppComponent.prototype._handleReaderLoaded = function (readerEvt) {
+        var binaryString = readerEvt.target.result;
+        this.base64textString = btoa(binaryString);
+        console.log(btoa(binaryString));
     };
     AppComponent.prototype.submitImage = function () {
-        var file = this.filesToUpload[0];
-        var formData = new FormData();
-        formData.append('uploadFile', file, file.name);
-        console.log(formData, this.filesToUpload);
-        this.http.post("http://localhost:3000/image/add", formData, httpOptions)
+        this.http.post("http://localhost:3000/myapp/image/add", this.base64textString)
             .subscribe(function (data) {
             console.log(data);
         });
