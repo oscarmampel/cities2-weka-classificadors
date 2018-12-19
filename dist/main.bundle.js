@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".spacer {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n.card {\n  margin: 15px auto;\n  max-width: 650px;\n}\n.upload-file{\n  margin-top: 1em;\n  margin-bottom: 1em;\n}\n.component-field {\n  display: block\n}\n.component-button {\n  max-width: 8em;\n}\n.material-icons {\n  margin-right: 1em;\n}\n.function {\n  margin-top: 2em;\n  margin-bottom: 2em;\n}\n.explanation{\n  padding: 1.75em 2em 2em;\n}\n\n"
+module.exports = ".spacer {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n}\r\n.card {\r\n  margin: 15px auto;\r\n  max-width: 650px;\r\n}\r\n.upload-file{\r\n  margin-top: 1em;\r\n  margin-bottom: 1em;\r\n}\r\n.component-field {\r\n  display: block\r\n}\r\n.component-button {\r\n  max-width: 8em;\r\n}\r\n.material-icons {\r\n  margin-right: 1em;\r\n}\r\n.function {\r\n  margin-top: 2em;\r\n  margin-bottom: 2em;\r\n}\r\n.explanation{\r\n  padding: 1.75em 2em 2em;\r\n}\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<mat-toolbar color=\"primary\">\n  <span>Cities 2 - Image Classification</span>\n  <span class=\"spacer\"></span>\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\n</mat-toolbar>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"function col-md-12\">\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\n      <mat-card class=\"card col-md-6\">\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\n\n        <div class=\"upload-file\">\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\n        </div>\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\n      </mat-card>\n      <div class=\"explanation col-md-6\">\n\n      </div>\n      <div class=\"col-md-12\">\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<mat-toolbar color=\"primary\">\r\n  <span>Cities 2 - Image Classification</span>\r\n  <span class=\"spacer\"></span>\r\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\r\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\r\n</mat-toolbar>\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"function col-md-12\">\r\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\r\n      <mat-card class=\"card col-md-6\">\r\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\r\n\r\n        <div class=\"upload-file\">\r\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\r\n        </div>\r\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\r\n      </mat-card>\r\n      <div class=\"explanation col-md-6\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12\">\r\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -36,8 +36,10 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return PizzaPartyComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,6 +49,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
 
 
 var httpOptions = { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({
@@ -54,9 +60,14 @@ var httpOptions = { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_htt
     })
 };
 var AppComponent = /** @class */ (function () {
-    function AppComponent(http) {
+    function AppComponent(http, snackBar) {
         this.http = http;
+        this.snackBar = snackBar;
         this.url = '';
+        this.http.get("http://localhost:3000/myapp/image/hi", httpOptions)
+            .subscribe(function (data) {
+            console.log(data);
+        });
     }
     AppComponent.prototype.handleFileInput = function (event) {
         var files = event.target.files;
@@ -73,9 +84,25 @@ var AppComponent = /** @class */ (function () {
         console.log(btoa(binaryString));
     };
     AppComponent.prototype.submitImage = function () {
+        var _this = this;
         this.http.post("http://localhost:3000/myapp/image/add", this.base64textString)
             .subscribe(function (data) {
-            console.log(data);
+            var result = '';
+            if (data === 0) {
+                result = 'Ascensor';
+            }
+            else if (data === 1) {
+                result = 'Floristeria';
+            }
+            else if (data === 2) {
+                result = 'Armari';
+            }
+            _this.snackBar.openFromComponent(PizzaPartyComponent, {
+                duration: 10000,
+                data: {
+                    option: result
+                }
+            });
         });
     };
     AppComponent = __decorate([
@@ -84,9 +111,26 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatSnackBar */]])
     ], AppComponent);
     return AppComponent;
+}());
+
+var PizzaPartyComponent = /** @class */ (function () {
+    function PizzaPartyComponent(data) {
+        this.data = data;
+    }
+    PizzaPartyComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'snack-bar-component-example-snack',
+            template: __webpack_require__("./src/app/snack-bar-component-example-snack.html"),
+            styles: ["\n    .example-pizza-party {\n      color: hotpink;\n    }\n  "],
+        }),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["y" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MAT_SNACK_BAR_DATA */])),
+        __metadata("design:paramtypes", [Object])
+    ], PizzaPartyComponent);
+    return PizzaPartyComponent;
 }());
 
 
@@ -124,21 +168,22 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]
+                __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__app_component__["b" /* PizzaPartyComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["c" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatTabsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatToolbarModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatCardModule */]
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatTabsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatCardModule */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
@@ -148,6 +193,13 @@ var AppModule = /** @class */ (function () {
 }());
 
 
+
+/***/ }),
+
+/***/ "./src/app/snack-bar-component-example-snack.html":
+/***/ (function(module, exports) {
+
+module.exports = "<span class=\"example-pizza-party\">\r\n  Resultat: {{data.option}}!\r\n</span>\r\n"
 
 /***/ }),
 

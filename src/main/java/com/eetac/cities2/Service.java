@@ -71,4 +71,24 @@ public class Service {
                     .allow("OPTIONS").build();//500
         }
     }
+
+    @GET
+    @Path("/statistics")
+    public Response statistics() {
+        String statistics;
+        try {
+            statistics = indoor.statistics();
+            return Response.status(Response.Status.CREATED).entity(statistics)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();//201;
+
+        } catch (Exception ex) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Bad request")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();//400
+        }
+
+    }
 }

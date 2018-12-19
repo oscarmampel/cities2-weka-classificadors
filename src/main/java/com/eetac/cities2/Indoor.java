@@ -36,7 +36,9 @@ public class Indoor {
 
         PHOGFilter phog = new PHOGFilter();
         phog.setOptions(optionsPhog);
+        System.out.println('a');
         phog.setInputFormat(data);
+        System.out.println('b');
         Instances phogData = Filter.useFilter(data, phog);
 
         String[] optionsR = new String[2];
@@ -110,21 +112,7 @@ public class Indoor {
         return d;
     }
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("entrena!!");
-        Indoor indoor = new Indoor();
-        System.out.println("classifica!!");
-        double d = indoor.classifica("ascensor.jpeg", "cities2-weka-classificadors/test");
-        System.out.println("ascensor==0?"+d);
-
-        d = indoor.classifica("floristeria.jpg", "cities2-weka-classificadors/test");
-        System.out.println("floristeria==1?"+d);
-
-        d = indoor.classifica("armario.jpeg", "cities2-weka-classificadors/test");
-        System.out.println("armario==2?"+d);
-    }
-
-    public static void main2(String[] args) throws Exception {
+    public String statistics() throws Exception {
         // carrego el datasource
         DataSource source = new DataSource("datasets/indoor.arff");
         Instances data = source.getDataSet();
@@ -164,7 +152,7 @@ public class Indoor {
             /**
              *    * testDataset
              *    + trainDataset
-             * 
+             *
              * fold = 0 dataset es dividiria com a *++++++++++
              * fold = 1 dataset es dividiria com a +*+++++++++
              * fold = 2 dataset es dividiria com a ++*++++++++
@@ -201,7 +189,7 @@ public class Indoor {
                         matrix[1][(int)d]++;
                         incorrectClassified++;
                     }
-                } 
+                }
                 //miro les instancies que no han sortit com a floristeria
                 else {
                     d = randomForest.classifyInstance(instance);
@@ -217,11 +205,32 @@ public class Indoor {
 
             System.out.println("test fold: "+fold);
         }
-
         System.out.println("Correctly Classified Instances "+correctClassified / (correctClassified + incorrectClassified));
         System.out.println("Matrix:");
         System.out.println(Arrays.toString(matrix[0]));
         System.out.println(Arrays.toString(matrix[1]));
         System.out.println(Arrays.toString(matrix[2]));
+
+        return +correctClassified / (correctClassified + incorrectClassified)+Arrays.toString(matrix[0])+Arrays.toString(matrix[1])+Arrays.toString(matrix[2]);
+}
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("entrena!!");
+        Indoor indoor = new Indoor();
+        System.out.println("classifica!!");
+        double d = indoor.classifica("ascensor.jpeg", "cities2-weka-classificadors/test");
+        System.out.println("ascensor==0?"+d);
+
+        d = indoor.classifica("floristeria.jpg", "cities2-weka-classificadors/test");
+        System.out.println("floristeria==1?"+d);
+
+        d = indoor.classifica("armario.jpeg", "cities2-weka-classificadors/test");
+        System.out.println("armario==2?"+d);
+    }
+
+    public static void main2(String[] args) throws Exception {
+        Indoor indoor = new Indoor();
+        String statistics = indoor.statistics();
+        System.out.println(statistics);
     }
 }
