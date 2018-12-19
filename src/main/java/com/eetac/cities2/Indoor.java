@@ -11,6 +11,7 @@ import weka.core.Instance;
 import weka.core.Attribute;
 import weka.core.SparseInstance;
 
+import javax.json.Json;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -211,10 +212,13 @@ public class Indoor {
         System.out.println(Arrays.toString(matrix[1]));
         System.out.println(Arrays.toString(matrix[2]));
 
-        return +correctClassified / (correctClassified + incorrectClassified)+Arrays.toString(matrix[0])+Arrays.toString(matrix[1])+Arrays.toString(matrix[2]);
+        return "{\"acerts\":"+ +correctClassified / (correctClassified + incorrectClassified) +
+                ", \"matrix1\":" + Arrays.toString(matrix[0]) +
+                ", \"matrix2\":" + Arrays.toString(matrix[1]) +
+                ", \"matrix3\":" + Arrays.toString(matrix[2]) + "}";
 }
 
-    public static void main(String[] args) throws Exception {
+    public static void main2(String[] args) throws Exception {
         System.out.println("entrena!!");
         Indoor indoor = new Indoor();
         System.out.println("classifica!!");
@@ -228,7 +232,7 @@ public class Indoor {
         System.out.println("armario==2?"+d);
     }
 
-    public static void main2(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         Indoor indoor = new Indoor();
         String statistics = indoor.statistics();
         System.out.println(statistics);

@@ -74,6 +74,7 @@ public class Service {
 
     @GET
     @Path("/statistics")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response statistics() {
         String statistics;
         try {

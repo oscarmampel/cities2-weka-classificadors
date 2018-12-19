@@ -27,7 +27,7 @@ module.exports = ".spacer {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 aut
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<mat-toolbar color=\"primary\">\r\n  <span>Cities 2 - Image Classification</span>\r\n  <span class=\"spacer\"></span>\r\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\r\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\r\n</mat-toolbar>\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"function col-md-12\">\r\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\r\n      <mat-card class=\"card col-md-6\">\r\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\r\n\r\n        <div class=\"upload-file\">\r\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\r\n        </div>\r\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\r\n      </mat-card>\r\n      <div class=\"explanation col-md-6\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12\">\r\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<mat-toolbar color=\"primary\">\r\n  <span>Cities 2 - Image Classification</span>\r\n  <span class=\"spacer\"></span>\r\n  <a href=\"https://eetac.upc.edu/ca\" target=\"_blank\"><img src=\"../../assets/image.png\" height=\"50\" width=\"50\" style=\"margin-left: 0.5em; margin-right: 0.5em\"></a>\r\n  <button mat-button><i class=\"fab fa-github\"></i> GitHub</button>\r\n</mat-toolbar>\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"function col-md-12\">\r\n      <h2 style=\"text-align: center; margin-bottom: 0.5em\">Cities 2 - Image Classification</h2>\r\n      <mat-card class=\"card col-md-6\">\r\n        <mat-card-title>Selecciona una imatge!</mat-card-title>\r\n\r\n        <div class=\"upload-file\">\r\n          <input type=\"file\" id=\"file1\" (change)=\"handleFileInput($event)\">\r\n        </div>\r\n        <button mat-raised-button color=\"primary\" class=\"component-button\" (click)=\"submitImage()\">Pujar</button>\r\n      </mat-card>\r\n      <mat-card class=\"card col-md-6\">\r\n        <mat-card-title>Estadístiques!</mat-card-title>\r\n        <mat-label>{{result.acerts}} % acerts</mat-label>\r\n      </mat-card>\r\n      <div class=\"col-md-12\">\r\n        Realitzat per: Erik Blanca, Aleix Cánovas, Oscar Mampel\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -61,12 +61,17 @@ var httpOptions = { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_htt
 };
 var AppComponent = /** @class */ (function () {
     function AppComponent(http, snackBar) {
+        var _this = this;
         this.http = http;
         this.snackBar = snackBar;
         this.url = '';
         this.http.get("http://localhost:3000/myapp/image/hi", httpOptions)
             .subscribe(function (data) {
             console.log(data);
+        });
+        this.http.get("http://localhost:3000/myapp/image/statistics", this.base64textString)
+            .subscribe(function (data) {
+            _this.result = data;
         });
     }
     AppComponent.prototype.handleFileInput = function (event) {
@@ -168,6 +173,10 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* NgModule */])({
             declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__app_component__["b" /* PizzaPartyComponent */]
+            ],
+            entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_2__app_component__["b" /* PizzaPartyComponent */]
             ],
