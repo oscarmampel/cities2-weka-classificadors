@@ -180,12 +180,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatSelectModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatTabsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatTabsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["k" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatCardModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]
+            ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
